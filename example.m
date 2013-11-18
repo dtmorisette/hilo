@@ -14,8 +14,20 @@ d0 = TranslateData(data, 'crop', 1);
 % gain/offset correction is warranted select appropriate range (strong depletion and 
 % strong accumulation)
 
+figure(7);
 plot(d0.Vg, d0.Cqs - d0.Chf)
 rng = find((d0.Vg < -2.0) | (d0.Vg > 3.0));
+
+hold on
+plot(d0.Vg(rng), d0.Cqs(rng) - d0.Chf(rng),'og')
+hold off
+xlabel('Gate Voltage (V)');
+ylabel('C_{QS} - C_{HF} (F)');
+title('Range selected for gain/offset correction');
+
+disp('Range selected: -2.0 < Vg < 3.0');
+disp('press any key to continue');
+pause
 
 % Perform analysis with specified area, with series resistance and gain/offset 
 % correction enabled
