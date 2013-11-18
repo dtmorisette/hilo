@@ -18,5 +18,8 @@ cp ${files[*]} ${SRC_FILES[*]} ${OTHER_FILES[*]} tmp/hilo
 version=`git describe`
 sed 's/\$VERSION_STRING\$/'"$version"'/' <hilo.m >tmp/hilo/hilo.m
 
-zip -rq "hilo_$version.zip" tmp/hilo -x "*.DS_Store"
+cd tmp
+zip -rq "hilo_$version.zip" hilo/* -x "*.DS_Store"
+mv *.zip ../
+cd ..
 rm -rf tmp
