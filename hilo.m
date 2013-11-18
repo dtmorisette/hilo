@@ -1,4 +1,4 @@
-function d = hilo(d, varargin)
+function d_out = hilo(d, varargin)
 % HILO  Process high-low C-V data into interface trap density vs. energy
 %
 % Notes:
@@ -6,9 +6,10 @@ function d = hilo(d, varargin)
 %
 % Syntax
 %
-%   d = HILO(d)  processes the given CV data with default parameters
+%   d = HILO('-v')  prints version string
+%   d = HILO(d)     processes the given CV data with default parameters
 %   d = HILO(d, 'param1', value1, 'param2', value2, ...) 
-%                allows additional parameters to be specified. 
+%                   allows additional parameters to be specified. 
 %
 %   d is a struct containing all the data required to perform HiLo CV
 %   analysis. The minimum set of fields is:
@@ -153,10 +154,10 @@ function d = hilo(d, varargin)
 % See LICENSE file for details.
 %
 
+    version = '$VERSION_STRING$';
 
     ip = inputParser;
-    ip.addRequired('d', @isstruct);
-
+    ip.addRequired('d', @(x)isstruct(x) || ischar(x));
     ip.addParamValue('Temperature',    -1, @isscalar);
     ip.addParamValue('Substrate',   'SiC'           );
     ip.addParamValue('Oxide',      'SiO2'           );
@@ -171,6 +172,17 @@ function d = hilo(d, varargin)
     ip.addParamValue('Method','Intercept'           );
     
     ip.parse(d, varargin{:});
+    
+    if ischar(d)
+        switch d
+            case {'-v', '--version'}
+                disp(version);
+            otherwise
+                disp(['Unknown option: ' d]);
+        end
+        return;
+    end                
+    
     debug = ip.Results.Debug;
     method = lower(ip.Results.Method);
     
@@ -461,6 +473,8 @@ function d = hilo(d, varargin)
         fprintf('Nit (HiLo) = %.2e cm^-2\n', d.Nit_hilo);
         fprintf('Nit (Cpsi) = %.2e cm^-2\n', d.Nit_Cpsi);
     end
+    
+    d_out = d;
 end
 
 function rng = FindAccumulation(C,n)
