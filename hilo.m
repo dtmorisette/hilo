@@ -148,7 +148,9 @@ function d = hilo(d, varargin)
 %       using surface potential based on depletion capacitance,?
 %       Journal of Applied Physics, vol. 111, no. 1, pp. 014502 1?5, 2012.
 %
-% Copyright (c) 2013 Dallas T. Morisette.
+% Copyright (c) 2013 Dallas T. Morisette (morisett@purdue.edu).
+% Released under the terms of the FreeBSD License. 
+% See LICENSE file for details.
 %
 
 
