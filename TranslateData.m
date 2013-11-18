@@ -1,3 +1,7 @@
+% Modify this function as needed to allow translation from any other format
+% to that expected by the HILO function. Mandatory fields are listed below
+% as fields of the "d_out" structure
+
 function d_out = TranslateData( d_in, varargin )
     ip = inputParser;
     ip.addRequired('d_in', @isstruct);
