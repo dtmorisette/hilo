@@ -15,11 +15,14 @@ mkdir -p tmp/hilo
 mkdir tmp/hilo/processed
 cp ${files[*]} ${SRC_FILES[*]} ${OTHER_FILES[*]} tmp/hilo
 
-version=`git describe`
-sed 's/\$VERSION_STRING\$/'"$version"'/' <hilo.m >tmp/hilo/hilo.m
+cd ../Common
+com_version=`git describe`
+cd ../hilo
+hilo_version=`git describe`
+sed 's/\$VERSION_STRING\$/'"hilo: $hilo_version; common: $com_version"'/' <hilo.m >tmp/hilo/hilo.m
 
 cd tmp
-zip -rq "hilo_$version.zip" hilo/* -x "*.DS_Store"
+zip -rq "hilo_$hilo_version.zip" hilo/* -x "*.DS_Store"
 mv *.zip ../
 cd ..
 rm -rf tmp
