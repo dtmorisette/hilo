@@ -358,7 +358,7 @@ function d_out = hilo(d, varargin)
             dU = fminbnd(@(dU)rms((d.Cs_fb./d.Cs_hf).^2 - 1./(CdNorm(Us-dU,Uf)).^2), ...
                           -5,5, options);
         case 'intercept'
-            [pf, rng] = FindLinearFit(d.phi_s/c.kTq, 1./(d.Cs_hf).^2, 5);
+            [pf, ~] = FindLinearFit(d.phi_s/c.kTq, 1./(d.Cs_hf).^2, 5);
             dU = -pf(2)/pf(1) + 1;
         
         otherwise
