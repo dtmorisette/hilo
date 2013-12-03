@@ -528,9 +528,9 @@ function d = CropRange(d,rng)
     fields = fieldnames(d);
     for i = 1:length(fields)
         field = fields{i};
-        tmp = getfield(d, field);
+        tmp = d.(field);
         if isvector(tmp) && ~isscalar(tmp) && isnumeric(tmp)
-            d = setfield(d, field, tmp(rng));
+            d.(field) = tmp(rng);
         end
     end
 end
@@ -542,7 +542,7 @@ function VerifyLengths(d)
     n = 0;
     fields = fieldnames(d);
     for i = 1:length(fields);
-        tmp = getfield(d, fields{i});
+        tmp = d.(fields{i});
         if isvector(tmp) && ~isscalar(tmp) && isnumeric(tmp)
             if n == 0
                 n = length(tmp);
