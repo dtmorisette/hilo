@@ -202,7 +202,6 @@ function d_out = hilo(d, varargin)
     % Get fundamental physical constants and material properties
     c  = GetConstants(d.T);
     s  = GetMaterial(ip.Results.Substrate, d.T);
-    ox = GetMaterial(ip.Results.Oxide, d.T);
     
     % If the 'Area' parameter is specified, override any existing
     % value in d.area. If not specified, and if d.area does not exist, set 
