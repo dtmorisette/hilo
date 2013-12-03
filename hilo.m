@@ -393,7 +393,7 @@ function d_out = hilo(d, varargin)
         % Flatband capacitance interpolation
         index = find(abs(diff(sign(d.Vg-d.Vfb)))==2);
         rng = index-5:index+5;    
-        d.Cfb = interp1(d.Vg,d.Chf,d.Vfb);
+        d.Cfb = interp1(d.Vg(rng),d.Chf(rng),d.Vfb);
 
         if debug
             fprintf('Vfb = %.2f V\n', d.Vfb);
