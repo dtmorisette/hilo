@@ -516,7 +516,6 @@ end
 function Rs = FindRs(C,G,f,n)
     rng = FindAccumulation(C,n);
     w2 = (2*pi*f)^2;
-    Cs = C + G.^2./(w2*C);
     Rs = G./(w2*C.^2 + G.^2);
     Rs = mean(Rs(rng));
 end
