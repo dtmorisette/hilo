@@ -1,35 +1,47 @@
-This directory contains the matlab function hilo.m and supporting functions and scripts. 
+This directory contains the matlab function hilo.m and supporting scripts. 
 
 Description
 -----------
 
-The hilo.m matlab function is used to process raw MOS capacitor high-low C-V data into interface trap density vs. trap energy data using two different methods: traditional high-low, and the C-psi technique. See the hilo.m comment header for usage details and literature references. 
+The hilo.m matlab function is used to process raw MOS capacitor high-low C-V
+data into interface trap density vs. trap energy data using two different
+methods: traditional high-low, and the C-psi technique. See the hilo.m comment
+header for usage details and literature references. 
 
 License
 -------
 
-These scripts are provided under the terms of the FreeBSD license, a copy of which is located in the LICENSE file in the same directory. 
+These scripts are provided under the terms of the FreeBSD license, a copy of
+which is located in the LICENSE file in the same directory. 
 
 Contact info
 ------------
 
-Questions can be addressed to the author, and reports of bugs, feature requests, or useful modifications are appreciated. Please address such questions or reports to:
+Questions can be addressed to the author, and reports of bugs, feature requests,
+or useful modifications are appreciated. Please address such questions or
+reports to:
 
 	Dallas T. Morisette, morisett@purdue.edu.
 
 Usage
 -----
 
-These matlab files should be placed in a directory accessible to MATLAB via it's search path (see MATLAB documentation on 'path' or 'addpath' functions).
+These matlab files should be placed in a directory accessible to MATLAB via it's
+search path (see MATLAB documentation on 'path' or 'addpath' functions).
 
-Scripts can be run from any working directory, so long as the filenames supplied include sufficient path information.
+Scripts can be run from any working directory, so long as the filenames supplied
+include sufficient path information.
 
-The file 'example.m' along with the provided example high-low c-v data file 'data.csv' demonstrate typical usage of the hilo.m function. It imports the data.csv file, translates it as needed, processes the data into interface trap density, and writes the data to the directory "processed".
+The file 'example.m' along with the provided example high-low c-v data file
+'data.csv' demonstrate typical usage of the hilo.m function. It imports the
+data.csv file, translates it as needed, processes the data into interface trap
+density, and writes the data to the directory "processed".
 
 Other Files
 -----------
 
-The following additional matlab files are required for normal operation, and are available at https://github.com/dtmorisette/MatlabUtilities:
+The following additional matlab files are required for normal operation, and are
+available at https://github.com/dtmorisette/MatlabUtilities:
 
 GetConstants.m	Retrieves required universal physical constants.
 GetMaterial.m	Retrieves required material properties.
@@ -40,12 +52,15 @@ The following scripts are optional but useful for import/export of raw C-V data:
 
 ImportCSV.m		Imports a CSV formatted file into matlab. 
 SaveAsCSV.m		Saves a matlab structure array to a CSV file.
-TranslateData.m	Helper script that converts the structure imported by ImportCSV
+TranslateData.m	Helper script that converts the structure imported by
+ImportCSV
 		to the format required by hilo.m. Should be modified as needed for
 		other input CSV formats.
 
 System specific info
 --------------------
 
-This code was developed under MATLAB R2012b (8.0.0.783) on OS X 10.9. Operation on other systems or versions of MATLAB may work but are not officially supported. 
+This code was developed under MATLAB R2012b (8.0.0.783) on OS X 10.9. Operation
+on other systems or versions of MATLAB may work but are not officially
+supported. 
 
