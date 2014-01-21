@@ -29,7 +29,7 @@ The file 'example.m' along with the provided example high-low c-v data file 'dat
 Other Files
 -----------
 
-The following additional matlab files are required for normal operation:
+The following additional matlab files are required for normal operation, and are available at https://github.com/dtmorisette/MatlabUtilities:
 
 GetConstants.m	Retrieves required universal physical constants.
 GetMaterial.m	Retrieves required material properties.
