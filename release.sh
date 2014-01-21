@@ -1,6 +1,6 @@
 #!/bin/bash
 LANG=C
-COMMON_DIR="../Common/"
+COMMON_DIR="../MatlabUtilities/"
 COMMON_FILES=(FindLinearFit.m GetConstants.m GetMaterial.m ImportCSV.m SaveAsCSV.m dydx.m)
 SRC_FILES=(example.m TranslateData.m)
 OTHER_FILES=(README LICENSE data.csv)
