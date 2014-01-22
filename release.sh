@@ -23,6 +23,6 @@ sed 's/\$VERSION_STRING\$/'"hilo: $hilo_version; common: $com_version"'/' <hilo.
 
 cd tmp
 zip -rq "hilo_$hilo_version.zip" hilo/* -x "*.DS_Store"
-mv *.zip ../
+mv *.zip ../release
 cd ..
 rm -rf tmp
