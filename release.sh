@@ -15,7 +15,7 @@ mkdir -p tmp/hilo
 mkdir tmp/hilo/processed
 cp ${files[*]} ${SRC_FILES[*]} ${OTHER_FILES[*]} tmp/hilo
 
-cd ../Common
+cd $COMMON_DIR
 com_version=`git describe`
 cd ../hilo
 hilo_version=`git describe`
