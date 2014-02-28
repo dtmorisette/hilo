@@ -19,11 +19,11 @@ function d_out = TranslateData( d_in, varargin )
     if isfield(d_in, 'G')
         d_out.G     = d_in.G(1:end-n);
     else
-        d_out.G     = zeros(size(d_out.Vgs));
+        d_out.G     = zeros(size(d_out.Vg));
     end
     if isfield(d_in, 'Qt')
         d_out.Qt    = d_in.Q_t(1:end-n);
     else
-        d_out.Qt    = zeros(size(d_out.Vgs));
+        d_out.Qt    = zeros(size(d_out.Vg));
     end
 end
