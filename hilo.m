@@ -248,9 +248,9 @@ function d_out = hilo(d, varargin)
         d.Cox = ip.Results.Cox;
     elseif ~isfield(d, 'Cox');
         d.Cox = FindCox(d.Cqs, 5);
-        if debug
-            fprintf('Cox = %.3f pF\n', d.Cox*1e12);
-        end
+    end
+    if debug
+        fprintf('Cox = %.3f pF\n', d.Cox*1e12);
     end
     
     % If RsCorrect was requested, extract Rs and correct d.Chf and d.G
@@ -297,7 +297,7 @@ function d_out = hilo(d, varargin)
     
     
     % Calculate doping profile
-    % J. R. Brews, J. of Appl. Phys., vol. 44, no. 7, pp. 3228?3231, 1973.
+    % J. R. Brews, J. of Appl. Phys., vol. 44, no. 7, pp. 3228-3231, 1973.
     d.w = s.k*c.eps0*d.area*(1./d.Chf - 1/d.Cox);
     d.doping = 2/(c.q*s.k*c.eps0)*(1-d.Cqs/d.Cox)./(1-d.Chf/d.Cox) ./ ...
                dydx(d.Vg,d.invCsq,11);
@@ -434,10 +434,6 @@ function d_out = hilo(d, varargin)
         semilogy(d.Ec_Ef, [d.Dit_hilo d.Dit_Cpsi],'.');
         xlabel('Trap Energy (E_c - E_t, eV)');
         ylabel('Interface Trap Density (cm^{-2} eV^{-1})');
-        i1 = find(d.Dit_hilo == min(d.Dit_hilo(d.Dit_hilo >= 1e10)));
-        i2 = find(d.Dit_Cpsi == min(d.Dit_Cpsi(d.Dit_Cpsi >= 1e10)));
-        xmax = d.Ec_Ef(max(i1,i2));
-        xlim([0 xmax]);
         ylim([1e10 10^(ceil(log10(max([d.Dit_hilo; d.Dit_Cpsi]))))]);
         grid on;
         hold on;
@@ -490,6 +486,7 @@ function rng = FindAccumulation(C,n)
     % Smooth given data and locate maximum
     C = smooth(C);
     i = find(C == max(C));
+    i = i(1);
     
     % Select data points to average
     m = length(C);
