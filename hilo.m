@@ -446,9 +446,9 @@ function d_out = hilo(d, varargin)
         xlabel('Surface Potential (kTq)')
         ylabel('Semiconductor Capacitance (F)');
         if d.type == 'n'
-            xlim([-50 5])
+            xlim([-s.Eg*0.4 d.Ecb_Ef]/c.kT;
         else
-            xlim([-5 50])
+            xlim([d.Ecb_Ef -s.Eg*0.4]/c.kT);
         end
         grid on;
         
