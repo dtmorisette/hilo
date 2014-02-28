@@ -17,9 +17,13 @@ function d_out = TranslateData( d_in, varargin )
     d_out.Chf       = d_in.Ch(1:end-n);
     d_out.Cqs       = d_in.Cq(1:end-n);
     if isfield(d_in, 'G')
-        d_out.G         = d_in.G(1:end-n);
+        d_out.G     = d_in.G(1:end-n);
+    else
+        d_out.G     = zeros(size(d_in.Vgs));
     end
     if isfield(d_in, 'Qt')
-        d_out.Qt        = d_in.Q_t(1:end-n);
+        d_out.Qt    = d_in.Q_t(1:end-n);
+    else
+        d_out.Qt    = zeros(size(d_in.Vgs));
     end
 end
