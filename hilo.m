@@ -81,7 +81,7 @@ function d_out = hilo(d, varargin)
 %       If 'Range' is used in conjunction with 'AdjRange' the latter is 
 %       corrected as needed.
 %
-%   'Debug' (default: false)
+%   'Debug' (default: true)
 %       The debug mode generates diagnostic plots and prints diagnostic
 %       information to the command line.
 %
