@@ -240,19 +240,6 @@ function d_out = hilo(d, varargin)
         end
     end    
     
-    % If the 'Cox' parameter is specified, override any existing value in
-    % d.Cox. If not specified, and if d.Cox does not exist, calculate based 
-    % on the average of 5 points in strong accumulation.
-    
-    if ip.Results.Cox > 0
-        d.Cox = ip.Results.Cox;
-    elseif ~isfield(d, 'Cox');
-        d.Cox = FindCox(d.Cqs, 5);
-    end
-    if debug
-        fprintf('Cox = %.3f pF\n', d.Cox*1e12);
-    end
-    
     % If RsCorrect was requested, extract Rs and correct d.Chf and d.G
     % Saves old Chf and G data in d.Chf_raw and d.G_raw, respectively
     % Will only be performed if d.Chf_raw does not exist, since running
@@ -279,6 +266,19 @@ function d_out = hilo(d, varargin)
     if ~isempty(adjustRange)
         pf = [d.Chf(adjustRange) ones(length(d.Chf(adjustRange)),1)]\d.Cqs(adjustRange);
         d.Chf = d.Chf*pf(1)+pf(2);
+    end
+    
+    % If the 'Cox' parameter is specified, override any existing value in
+    % d.Cox. If not specified, and if d.Cox does not exist, calculate based 
+    % on the average of 5 points in strong accumulation.
+    
+    if ip.Results.Cox > 0
+        d.Cox = ip.Results.Cox;
+    elseif ~isfield(d, 'Cox');
+        d.Cox = FindCox(d.Cqs, 5);
+    end
+    if debug
+        fprintf('Cox = %.3f pF\n', d.Cox*1e12);
     end
     
     % Extract doping using slope of linear fit of 1/Chf^2 vs Vg plot
