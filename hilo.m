@@ -56,9 +56,15 @@ function d_out = hilo(d, varargin)
 %       If specified, any existing value is overwritten. If not specified 
 %       and no existing value is present, the default value is used.
 %
+%   'Doping' (default: auto-calculated)
+%       The doping level of the substrate. Specifying this option overrides
+%       the default calculated from the slope of 1/CHF^2 vs Vg. Positive
+%       values indicate p-type, negative values indicate n-type.
+%
 %   'Offset' (default: 0)
-%       The offset applied to the calculated surface potential. Used to
-%       explore the effect of arbitrary shifts in the surface potential.
+%       The offset applied to the calculated surface potential, specified
+%       in units of kT/q. Used to explore the effect of arbitrary shifts 
+%       in the surface potential.
 %
 %   'Range' (default: [])
 %       A list of indices of the data that will be retained for analysis.
@@ -294,7 +300,6 @@ function d_out = hilo(d, varargin)
         d.Nd = 0;
         d.type = 'p';
     end
-    
     
     % Calculate doping profile
     % J. R. Brews, J. of Appl. Phys., vol. 44, no. 7, pp. 3228-3231, 1973.
