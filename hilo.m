@@ -170,6 +170,7 @@ function d_out = hilo(d, varargin)
     ip.addParamValue('Area',           -1, @isscalar);
     ip.addParamValue('Frequency',      -1, @isscalar);
     ip.addParamValue('Cox',            -1, @isscalar);
+    ip.addParamValue('Doping',          0, @isscalar);
     ip.addParamValue('Offset',          0, @isscalar);
     ip.addParamValue('Range',          [], @isvector);
     ip.addParamValue('RsCorrect',    true           );
@@ -290,7 +291,12 @@ function d_out = hilo(d, varargin)
     % Extract doping using slope of linear fit of 1/Chf^2 vs Vg plot
     d.invCsq = 1./(d.Chf/d.area).^2;
     [pf, rng] = FindLinearFit(d.Vg, d.invCsq, 5);
-    doping = 2/(c.q*c.eps0*s.k*pf(1));
+    if ip.Results.Doping == 0
+        doping = 2/(c.q*c.eps0*s.k*pf(1));
+    else
+        doping = ip.Results.Doping;
+    end
+    
     if doping < 0
         d.Nd = -doping;
         d.Na = 0;
