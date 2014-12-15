@@ -2,3 +2,4 @@
 .DS_Store
 processed/
 *.zip
+release/
