@@ -378,7 +378,7 @@ function d_out = hilo(d, varargin)
     d.Ec_Ef = s.Ec_Ei - d.Ef_Ei - d.phi_s;      
 
     if debug
-        invCssq = 1./(d.Cs_hf).^2;
+        invCssq = 1./(d.Cs_hf/d.area).^2;
         [pf, rng] = FindLinearFit(d.phi_s, invCssq, 5);
         figure(nFig);
         nFig = nFig + 1;
