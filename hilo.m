@@ -79,13 +79,17 @@ function d_out = hilo(d, varargin)
 %   'AdjRange' (default: [])
 %       A list of indices of the data to use to calculate gain and offset
 %       correction parameters. If the list is empty no offset correciton is
-%       performed. The listed data points should be in strong accumulation
-%       and/or strong depletion where Cqs and Chf should be equal. The 
-%       adjusted Chf overwrites the existing Chf data; 
-%       The corrected d.Chf' = A * d.Chf + B. The coeffients A and B are 
-%       found to minimize the error term Cqs-Chf in a least-squared sense.
-%       If 'Range' is used in conjunction with 'AdjRange' the latter is 
-%       corrected as needed.
+%       performed. The listed data points should be in an range where 
+%       where Cqs and Chf should be equal, such as strong depletion. The 
+%       adjusted Chf overwrites the existing Chf data.
+%
+%   'AdjOffsetOnly' (default: True)
+%       If False, the corrected d.Chf' = A * d.Chf + B. The coeffients 
+%       A and B are found to minimize the error term Cqs-Chf in a 
+%       least-squared sense. If 'Range' is used in conjunction with 
+%       'AdjRange' the latter is corrected as needed. 
+%       If True, A is assumed to be 1, or equivalenty no gain correction
+%       is applied. The average offset in the supplied range is removed.
 %
 %   'Debug' (default: true)
 %       The debug mode generates diagnostic plots and prints diagnostic
@@ -175,6 +179,7 @@ function d_out = hilo(d, varargin)
     ip.addParamValue('Range',          [], @isvector);
     ip.addParamValue('RsCorrect',    true           );
     ip.addParamValue('AdjRange',       [], @isvector);
+    ip.addParamValue('AdjOffsetOnly',true           );
     ip.addParamValue('Debug',        true           );
     ip.addParamValue('Method','Intercept'           );
     
@@ -271,8 +276,12 @@ function d_out = hilo(d, varargin)
     % Perform gain/offset correction
     % Chf' = A * Chf + B
     if ~isempty(adjustRange)
-        pf = [d.Chf(adjustRange) ones(length(d.Chf(adjustRange)),1)]\d.Cqs(adjustRange);
-        d.Chf = d.Chf*pf(1)+pf(2);
+        if ip.Results.AdjOffsetOnly % A = 1
+            d.Chf = d.Chf - mean(d.Chf(adjustRange)-d.Cqs(adjustRange));
+        else
+            pf = [d.Chf(adjustRange) ones(length(d.Chf(adjustRange)),1)]\d.Cqs(adjustRange);
+            d.Chf = d.Chf*pf(1)+pf(2);
+        end
     end
     
     % If the 'Cox' parameter is specified, override any existing value in
