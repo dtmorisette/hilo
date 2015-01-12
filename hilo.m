@@ -358,7 +358,7 @@ function d_out = hilo(d, varargin)
     end
     
     % Flatband capacitance and voltage
-    Uf = -fzero(@(u)exp(-u) - exp(u) + (d.Nd - d.Na)/s.ni, 0);
+    Uf = -asinh((d.Nd - d.Na)/s.ni/2);
     d.Ef_Ei = -c.kT*Uf;
     nb = s.ni*exp( d.Ef_Ei/c.kT);
     pb = s.ni*exp(-d.Ef_Ei/c.kT);
