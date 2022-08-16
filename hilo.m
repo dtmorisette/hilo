@@ -83,7 +83,7 @@ function d_out = hilo(d, varargin)
 %       where Cqs and Chf should be equal, such as strong depletion. The 
 %       adjusted Chf overwrites the existing Chf data.
 %
-%   'AdjOffsetOnly' (default: True)
+%   'AdjOffsetOnly' (default: true)
 %       If False, the corrected d.Chf' = A * d.Chf + B. The coeffients 
 %       A and B are found to minimize the error term Cqs-Chf in a 
 %       least-squared sense. If 'Range' is used in conjunction with 
