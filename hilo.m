@@ -323,8 +323,10 @@ function d_out = hilo(d, varargin)
                dydx(d.Vg,d.invCsq,11);
     
     if debug
-        figure('Number', nFig, 'Name', 'InvCsq_vs_VG');
+        f = figure(nFig);
+        f.Name = 'InvCsq_vs_VG';
         nFig = nFig + 1;
+        
         if d.type == 'n'
             x = linspace(min(d.Vg),-pf(2)/pf(1));
         else
@@ -344,8 +346,10 @@ function d_out = hilo(d, varargin)
         end
         fprintf('%s = %.3e cm^-3\n', str, abs(doping));
 
-        figure('Number', nFig, 'Name', 'doping_profile');
+        f = figure(nFig);
+        f.Name = 'doping_profile';
         nFig = nFig + 1;
+        
         semilogy(d.w*1e7, abs(d.doping));
         xlabel('Depth (nm)');
         if d.type == 'n'
@@ -389,8 +393,11 @@ function d_out = hilo(d, varargin)
     if debug
         invCssq = 1./(d.Cs_hf/d.area).^2;
         [pf, rng] = FindLinearFit(d.phi_s, invCssq, 5);
-        figure('Number', nFig, 'Name', 'InvCsq_vs_SurfacePotential');
+        
+        f = figure(nFig);
+        f.Name = 'InvCsq_vs_SurfacePotential';
         nFig = nFig + 1;
+        
         if d.type == 'n'
             x = linspace(min(d.phi_s), -pf(2)/pf(1));
         else
@@ -449,8 +456,10 @@ function d_out = hilo(d, varargin)
     d.Nit_Cpsi = trapz(d.Ec_Ef(rng),d.Dit_Cpsi(rng));
     
     if debug
-        figure('Number', nFig, 'Name', 'Dit_vs_Energy');
+        f = figure(nFig);
+        f.Name = 'Dit_vs_Energy';
         nFig = nFig + 1;
+        
         semilogy(d.Ec_Ef, [d.Dit_hilo d.Dit_Cpsi],'.');
         xlabel('Trap Energy (E_c - E_t, eV)');
         ylabel('Interface Trap Density (cm^{-2} eV^{-1})');
@@ -460,8 +469,10 @@ function d_out = hilo(d, varargin)
         semilogy(d.Ecb_Ef*[1 1],ylim,'r--');
         hold off;
         
-        figure('Number', nFig, 'Name', 'Cs_vs_SurfacePotential');
+        f = figure(nFig);
+        f.Name = 'Cs_vs_SurfacePotential';
         nFig = nFig + 1;
+        
         semilogy(d.phi_s/c.kTq, [d.Cs_qs d.Cs_hf d.Cs_ideal]);
         xlabel('Surface Potential (kTq)')
         ylabel('Semiconductor Capacitance (F)');
@@ -472,8 +483,10 @@ function d_out = hilo(d, varargin)
         end
         grid on;
         
-        figure('Number', nFig, 'Name', 'C_vs_VG');
+        f = figure(nFig);
+        f.Name = 'C_vs_VG';
         nFig = nFig + 1;
+        
         plot(d.Vg, [d.Cqs d.Chf d.Chf_ideal]*1e12, ...
              d.Vg, d.Cox*ones(size(d.Vg))*1e12,'k--');
         if isfield(d,'Vfb')
